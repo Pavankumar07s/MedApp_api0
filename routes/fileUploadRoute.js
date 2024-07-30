@@ -1,6 +1,5 @@
 const express = require("express");
 const upload = require("../configFileUpload/multerConfig");
-const File = require("../models/File");
 
 const { fileUpload } = require("../controllers/fileUpload");
 
