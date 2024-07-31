@@ -1,0 +1,12 @@
+helm create helloworld //used to create helm chart
+microk8s helm install myhelloworld helloworld //used to install helm chart and myhelloworld is just helm chart name
+microk8s helm list -a
+hostname -I
+microk8s helm uninstall myhelloworld 
+microk8s helm upgrade myhelloworld helloworld
+microk8s helm rollback myhelloworld 2 //here 2 is the revision version
+microk8s helm install myhelloworld --debug --dry-run helloworld //uses k8s to verify and debug
+microk8s helm template helloworld //don;t uses the k8s to check 
+microk8s helm lint helloworld //find any error or misconfiguration
+helm search hub wordpress
+helm repo list

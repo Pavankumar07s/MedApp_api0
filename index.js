@@ -7,7 +7,8 @@ const generateOTP = require("./routes/generateOTP");
 const protectedRoutes = require("./routes/protectedRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");
 const fileUploadRoute = require("./routes/fileUploadRoute");
-
+const downloadRoute = require("./routes/downloadRoute");
+const cors = require("cors");
 // Load environment variables
 dotenv.config({ path: "./config.env" });
 
@@ -30,11 +31,12 @@ console.log(`Connecting to MongoDB at ${DB}`);
 console.log(`Server will run on port ${PORT}`);
 
 // Middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json(), cors());
 app.use("/api/users", userRoutes);
 app.use("/api/protected", authMiddleware, protectedRoutes);
 app.use("/api/generateOTP", generateOTP);
 app.use("/api/upload", fileUploadRoute);
+app.use("/api/download", downloadRoute);
 // MongoDB Connection
 mongoose
   .connect(DB, {
