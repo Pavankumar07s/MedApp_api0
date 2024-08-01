@@ -8,9 +8,12 @@ const protectedRoutes = require("./routes/protectedRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");
 const fileUploadRoute = require("./routes/fileUploadRoute");
 const downloadRoute = require("./routes/downloadRoute");
+const paymentRoute = require("./routes/paymentRoute");
 const cors = require("cors");
 // Load environment variables
-dotenv.config({ path: "./config.env" });
+dotenv.config();
+
+
 
 // Check if environment variables are loaded correctly
 if (!process.env.MONGODB_URI || !process.env.MONGODB_PASSWORD) {
@@ -27,7 +30,6 @@ const DB = process.env.MONGODB_URI.replace(
 );
 
 // Debugging statements
-console.log(`Connecting to MongoDB at ${DB}`);
 console.log(`Server will run on port ${PORT}`);
 
 // Middleware
@@ -37,6 +39,7 @@ app.use("/api/protected", authMiddleware, protectedRoutes);
 app.use("/api/generateOTP", generateOTP);
 app.use("/api/upload", fileUploadRoute);
 app.use("/api/download", downloadRoute);
+app.use("/api/payment", paymentRoute);
 // MongoDB Connection
 mongoose
   .connect(DB, {
