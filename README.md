@@ -51,11 +51,17 @@ MedApp API is a backend server built with Node.js, Express, and MongoDB for mana
    Create a `.env` file in the root directory with the following contents:
     ```env
     PORT=8000
-    MONGODB_URI=your_mongodb_connection_string
-    MONGODB_PASSWORD=your_mongodb_password
-    JWT_SECRET=your_jwt_secret
-    EMAIL=your_email@gmail.com
-    EMAIL_PASSWORD=your_email_password
+    MONGODB_PASSWORD="
+    MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xc3pjzx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    AI71_APIKEY=
+    JWT_SECRET=
+    GAPPUSER="nodemailer user"
+    GAPP="nodemailer password"
+    CLOUDINARY_CLOUD_NAME=''
+    CLOUDINARY_API_KEY=""
+    CLOUDINARY_API_SECRET=""
+    STRIPE_SECRET_KEY=""
+
     ```
 
 4. Start the server:
