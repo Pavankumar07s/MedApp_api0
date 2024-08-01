@@ -34,7 +34,7 @@ exports.OTPgenerator = async (req, res) => {
     service: "gmail",
     secure: true,
     auth: {
-      user: "pawankumar14662693@gmail.com",
+      user: process.env.GAPPUSER,
       pass: process.env.GAPP,
     },
     tls: {
