@@ -4,17 +4,17 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
 const generateOTP = require("./routes/generateOTP");
+const authRoutes = require("./routes/authRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");
+const passwordResetRoutes = require('./routes/passwordResetRoutes');
 const fileUploadRoute = require("./routes/fileUploadRoute");
 const downloadRoute = require("./routes/downloadRoute");
 const paymentRoute = require("./routes/paymentRoute");
+const doctorRoute = require("./routes/doctorRoute");
 const cors = require("cors");
 // Load environment variables
 dotenv.config();
-
-
-
 // Check if environment variables are loaded correctly
 if (!process.env.MONGODB_URI || !process.env.MONGODB_PASSWORD) {
   console.error("Missing MONGODB_URI or MONGODB_PASSWORD in config.env");
@@ -35,7 +35,10 @@ console.log(`Server will run on port ${PORT}`);
 // Middleware
 app.use(bodyParser.json(), cors());
 app.use("/api/users", userRoutes);
+app.use("/api/doctor", doctorRoute);
+app.use('/api/auth', authRoutes);
 app.use("/api/protected", authMiddleware, protectedRoutes);
+app.use('/api/password-reset', passwordResetRoutes);
 app.use("/api/generateOTP", generateOTP);
 app.use("/api/upload", fileUploadRoute);
 app.use("/api/download", downloadRoute);

@@ -1,9 +1,9 @@
 const dotenv = require("dotenv");
 dotenv.config();
+const Payment = require("../models/payment");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 exports.paymentController = async (req, res) => {
-  console.log(req);
   const { amount, currency, paymentMethodType } = req.body;
 
   try {
