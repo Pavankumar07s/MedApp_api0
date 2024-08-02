@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const axios = require("axios");
+const redisClient = require("../redisClient");
 exports.createUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -12,12 +13,29 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.getUser = async (req, res) => {
+  console.log(req.params);
+  const userId = req.params.id;
+
   try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    // Check if user data is in Redis cache
+    const cachedUser = await redisClient.get(userId);
+    if (cachedUser) {
+      return res.json(JSON.parse(cachedUser));
+    }
+
+    // If not in cache, fetch from MongoDB
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Store user data in Redis cache
+    await redisClient.set(userId, JSON.stringify(user));
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
