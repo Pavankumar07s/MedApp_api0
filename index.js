@@ -18,10 +18,7 @@ const doctorRoute = require("./routes/doctorRoute");
 const redisClient = require("./redisClient");
 const rateLimiter = require("./middlewares/rateLimiter");
 const healthFitnessRoutes = require("./routes/healthFitnessRoutes");
-const appointmentRoutes = require('./routes/appointmentRoutes');
-
-
-
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 const cors = require("cors");
 // Load environment variables
@@ -64,7 +61,7 @@ app.use("/api/upload", fileUploadRoute);
 app.use("/api/download", downloadRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/healthFitness", healthFitnessRoutes);
-app.use('/api/appointments', appointmentRoutes);
+app.use("/api/appointments", appointmentRoutes);
 // MongoDB Connection
 mongoose
   .connect(DB, {
