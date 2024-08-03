@@ -53,7 +53,8 @@ app.use(
 );
 app.use("/api/users", rateLimiter, userRoutes);
 app.use("/api/doctor", doctorRoute);
-app.use("/api/auth", rateLimiter, authRoutes);
+app.use("/api/auth/user", rateLimiter, authRoutes);
+app.use("/api/auth/doc", rateLimiter, authRoutes);
 app.use("/api/protected", authMiddleware, protectedRoutes);
 app.use("/api/password-reset", passwordResetRoutes);
 app.use("/api/generateOTP", generateOTP);
